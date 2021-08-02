@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final project | Jorge Sanchez Ortiz de Galisteo</title>
+	<link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/intersection-observer"></script>
+	<script src="https://unpkg.com/scrollama"></script>
+</head>
+<style type="text/css">
+	body, html {
+		top:0;
+		left:0;
+		margin:0;
+		font-family:'Lato', sans-serif;
+	}
+	nav	{
+		background-color:white;
+		position:fixed;
+		width:100%;
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		border-bottom:0.05em solid black;
+		z-index:100;
+	}
+	.title {
+		height:30vh;
+		color:white;
+		background-color:black;
+		background-image:url('https://images.unsplash.com/photo-1542601098-8fc114e148e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3450&q=80');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: bottom;
+		background-size: 100%;
+	}
+	.title h1 {
+		font-size:4em;
+		letter-spacing:-0.02em;
+		padding-top:1%;
+		padding-bottom:2%;
+		line-height:1em;
+		text-shadow: 1px 1px 1px black;
+	}
+	.title h2 {
+		font-size:1.25em;
+		font-weight:400;
+		text-shadow: 1px 1px 1px black;
+	}
+	.header {
+		text-align:center;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		padding:5% 0%;
+		animation: fadeIn 0.5s ease-in-out;
+	}
+	.header h1{
+		font-family:'Lora', serif;
+		font-weight:500;
+		margin:0;
+		text-shadow: 5px 5px 5px 5px black;
+	}
+	.header h2 {
+		margin:0;
+		text-shadow: 2px 2px 2px 2px black;
+	}
+	.sticky {
+		float:right;
+		top:25%;
+		position:sticky;
+		width:50%;
+		display:inline-flex;
+					background-color:white;
+	}
+	.leftside{
+		background-color:black;
+		color:white;
+		width: 30%;
+    	padding: 5% 10% 5% 5%;
+	}
+	.progressive{
+		width:100%;
+		display:block;
+		margin-bottom:100%!important;
+	}
+	.end {
+		margin-bottom:5%!important;
+	}
+	#counter {
+		width:100%;
+		font-size:10em;
+		text-align:center;
+		margin:0;
+		padding:0%;
+		line-height:1em;
+		font-weight: 800;
+    	letter-spacing: -0.05em;
+	}
+	#counter h2{
+		text-align:center;
+	}
+	.text {
+		margin:5%;
+		margin-left:20%;
+		margin-right:20%;
+		line-height:2em;
+		opacity:0;
+		margin-top:10%;
+		transition:0.5s ease-in-out;
+	}
+	.text h1 {
+		font-family: 'Lora', serif;
+		color:#003a6d;
+		font-size:2.5em;
+		letter-spacing:-0.02em;
+		line-height:1em;
+		font-weight:300;
+		width:100%;
+	}
+	.text h2 {
+		font: weight 1,300;
+		font-size:1em;
+		font-style:italic;
+	}
+	.sticky h1 {
+		width:100%;
+		font-size:3em;
+	}
+	.sticky h2 {
+		font-size:0.8em;
+		text-transform:uppercase;
+		letter-spacing:0.1em;
+	}
+	.center_aligner {
+		overflow:none;
+		width:100%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		margin:2% 0%;
+	}
+	iframe {
+		border:0.05em solid #414042;
+		width:850px;
+		height:850px;
+	}
+	.tableauPlaceholder{
+		width:50%;
+		z-index:0;
+	}
+	img{
+		text-align:center;
+		margin-top:5%;
+		width:100%;
+	}
+	.caption {
+		font-family:'Lato', sans-serif;
+		text-align: center;
+		font-size:1em;
+		color:black;
+		font-weight: 300;
+	}
+	.small {
+		width:30%;
+	}
+	.large {
+		width:80%;
+		display:block;
+	}
+	@keyframes fadeIn {
+		0%{
+			opacity:0;
+		}
+		100%{
+			opacity:1;
+		}
+	}
+	@media screen and (max-width:767px){
+		.sticky {
+	/*		bottom:0;*/
+			width:50%;
+			float:none;
+			margin:auto;
+			display:flex;
+			line-height:2em;
+		}
+		.sticky h1 {
+			font-size:2em;
+			line-height:2em;
+		}
+		.sticky h2 {
+			font-size:0.5em;
+		}
+		#counter {
+			font-size:5em;
+		}
+		.leftside {
+			width: 85%;
+    		padding: 5% 10% 5% 5%;
+		}
+		.small {
+			width:100%;
+		}
+		.title {
+			height:80vh;
+		}
+		.text h1 {
+			font-size:2.5em;
+			width:80%;
+		}
+		.text {
+			margin:10% 5%;
+		}
+		iframe {
+			height:300px;
+		}
+
+	}
+</style>
+<body>
+
+<!-- nav -->
+<nav>
+	<h3>Information Design for Infographics & Visual Storytelling</h3>
+</nav>
+
+<!-- text -->
+<div class='header title step'>
+	<div class='aligner'>
+		<h1>We have a problem in the North</h1>
+		<h2>Research shows that people in the Territories die significantly earlier than in the rest of Canada</h2>	
+	</div>
+</div>
+
+
+<div class='text'>
+	<h2 style="color: #003a6d">By Jorge Sanchez Ortiz de Galisteo</h2>	
+	Many of us would probably assume that most people in a developed country like Canada would die at a pretty high age, but that is not always the case, depending on where they live. There are also interesting differences in the most popular marital statuses depending on the area, as data from the study <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310071101" target="_blank" style="color: #003a6d"><i>Deaths, by marital status</i></a> in Canada by <a href="https://www.statcan.gc.ca/eng/start" target="_blank" style="color:#003a6d">Statistics Canada</a> shows.
+
+	<img class='' src="images/arctic-6022732_1280.jpg"> 	
+	<div class='caption'>More than 4 out of each ten people die single. <i>Image: Pixabay</i></div>	
+</div>
+
+<div class='text'>
+	<h1>More people die single in the Territories</h1>
+	Most Canadians are married or widowed when they pass away (39.59% and 35.09% on average, respectively). That is, at least, the case in all the Canadian provinces. However, not in the Territories: In the Northwest Territories and Nunavut, most people have never been married by the time they decease (31.77% and 43.88%, respectively), followed by those married, in the second place. In the Yukon, married people take the lead, at 33.63%, followed by the ones who are single (26.07%). 
+</div>	
+<!-- interactive embed, adjust the width and height as necessary, copy lines 155 to 157 to create a new interactive embed --> 
+<div class='center_aligner'>
+		<iframe src="deceased by marriage status.html" frameBorder=0 scrolling=no></iframe>
+	</div>
+
+<div class='text'>
+	<h1>Lower life expectancy in the North</h1>
+	If we look at the Canadian average, people over 85 years of age represent most deaths (33.12%) between 2000 and 2019. This age group also leads in 9 out of 10 provinces, with Newfoundland and Labrador being the only exception, with the age group of 75-84 years taking the first position, by only a 1.37% over the 85+ group.
+	The picture is entirely different in the North: In the Territories, younger age groups take the lead: In the Northwest Territories and the Yukon, the group of those between 45 and 64 years of age represent most deaths (27.04% and 29.18%, respectively); while in Nunavut the group between 15 and 44 years leads the ranking (29.82%). 
+	The case of Nunavut is particularly alarming, showcasing a much lower life expectancy than in the rest of the country. The mortality of those between 15 and 44 is almost seven times higher than the Canadian average. In addition, the number of deaths of those under 15 years of age is also exceptionally high, at 12.37%, more than 12 times over the country average (1.02%).
+</div>
+
+<!-- interactive embed, adjust the width and height as necessary, copy lines 155 to 157 to create a new interactive embed --> 
+<div class='center_aligner'>
+	<iframe src="deceased people by age group.html" frameBorder=0 scrolling=no></iframe>
+</div>
+
+<div class='text'>
+	<h1>In summary</h1>
+	The study <a href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310071101" target="_blank" style="color: #003a6d"><i>Deaths, by marital status</i></a> in Canada by <a href="https://www.statcan.gc.ca/eng/start" target="_blank" style="color:#003a6d">Statistics Canada</a> shows a big gap between the north and south of the country regarding life expectancy and marital status between 2000 and 2019: People in the Territories die at a significantly lower age, most of them being single. 
+	The case of Nunavut, where more than 4 out of each ten people die single; and where the number of deaths of people under 15 years is more than 12 times over the country average, deserves particular attention.
+	The isolation of Nunavut's communities may be one of the leading causes that explain this phenomenon, as they are accessible year-round only by air, making it challenging to provide healthcare and access and follow a healthy lifestyle. 
+</div>
+
+</body>
+<script type="text/javascript">
+
+// instantiate the scrollama
+const scroller = scrollama();
+const scroller2 = scrollama();
+
+scroller
+  .setup({
+    step: ".text",
+    offset: 0.9,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    el.style.marginTop='5%';    
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller.resize);
+
+scroller2
+  .setup({
+    step: ".progressive",
+    offset: 0.6,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    if(response.index==0 || 1 || 2){
+    	stick('dynamic_sticky1')
+    	response.direction=='down'
+    	if(response.index==0){
+    		count(1,16,1,'Energy','after a 15 minute break','dynamic_sticky1')
+    	} else if (response.index==1){
+    		count(1,3.8,.1,'Engagement','average','dynamic_sticky1')
+    	} else if (response.index==2){
+    		count(0,0.9,.1,'Mood','increase','dynamic_sticky1')
+    	}
+    }
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+    console.log(response.index)
+    if(response.index==2){
+    	unstick('dynamic_sticky1')
+    }
+    el.style.opacity=0;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller2.resize);
+
+function count(number1, number2, step, title, label, location_id, prefix='+', suffix='%'){
+	target = document.querySelector('#'+location_id)
+	console.log(target)
+	let text=number1;
+
+	setInterval(function(){
+		if(text!=number2){
+			num = text+step
+			if(num % 1 == 0){
+				text = num
+			} else {
+				text = parseFloat(num.toFixed(2))
+			}
+			target.innerHTML="<div class='aligner'><h1>"+title+"</h1><div id='counter'>"+prefix+text+suffix+"</div><h2>"+label+"</h2></div>"
+		}
+	}, 30);
+}
+
+function stick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="sticky"
+}
+
+function unstick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="relative"
+}
+
+</script>
+
+</html>
